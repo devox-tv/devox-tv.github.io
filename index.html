@@ -40,13 +40,15 @@ body {
 }
 #peliculas-mensaje {
   position: fixed;
+  z-index:1;
   bottom: 2vh; /* Ajusta la distancia al logo */
   right: 1%;   /* Ajusta la posición horizontal */
   color: #fff;
   font-family: "Press Start 2P", system-ui;
   font-size: 12px;
-  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff; /* Efecto de brillo */
+  text-shadow: 0 0 10px #fff, 0 0 20px #752121, 0 0 30px #fff; /* Efecto de brillo */
   /*animation: glow 2s infinite alternate; /* Animación de brillo */
+  opacity: calc(80%);
 }
 
 @keyframes glow {
@@ -97,6 +99,7 @@ body {
             width: 83vw; /* Use vw for viewport width, adjust as needed */
             height: 95vh; /* Use vh for viewport height */
             background-color: #31313179;
+            z-index:5;
         }
 
 
@@ -120,21 +123,29 @@ body {
     left: 10px;
         }
 
+        #chatty { 
+    height: 79%; 
+    opacity: calc(80%);
+        }
+
+
         #logo {
     position: fixed;       /* Fija el logo en la esquina */
-    bottom: 4vh;             /* Distancia desde arriba */
-    right: 0.95%;
+    bottom: 6vh;             /* Distancia desde arriba */
+    right: 1%;
     height: 15%;           /* Distancia desde la derecha */
     z-index: 2;            /* Asegura que esté encima de todo */
     transition: 0.5s ease; 
-    opacity: calc(20%);
+    opacity: calc(80%);
+    transform: scale(1.2);
   
 }   
+/*
 #logo:hover{
     transform: scale(1.2);
 bottom: 6vh;
-    opacity: calc(100%);
-}
+    opacity: calc(80%);
+}*/
 
 </style>
 </head>
@@ -167,8 +178,8 @@ bottom: 6vh;
 
   <div id="chat-window" class="window">
     <div class="window-title">Chat de Twitch ( ͡° ͜ʖ ͡°)</div>
-    <div class="window-content">
-        <iframe src="https://www.twitch.tv/embed/teemo_en_arbusto/chat?parent=johnporro.github.io" frameborder="0" allowfullscreen="true"></iframe>
+    <div class="window-content" id="chatty">
+        <iframe src="https://www.twitch.tv/embed/teemo_en_arbusto/chat?darkpopout&parent=johnporro.github.io" frameborder="0" allowfullscreen="true"></iframe>
     </div>
   </div>
 
