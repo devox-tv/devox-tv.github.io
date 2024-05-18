@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+    <div id="peliculas-mensaje">✨ ¡Pide pelis en el chat! ✨</div>
+
+<head>
+    <meta http-equiv="default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; frame-src *; style-src * 'unsafe-inline';">
+<title>🔴 Ｄｅｖｏｘ　ＴＶ</title>
+<script src= "https://player.twitch.tv/js/embed/v1.js"></script>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style: monospace;
+    background-color: #c0c0c0;
+    margin: 0;
+    overflow: hidden;
+    font-size:12px !important;
+    text-shadow: 0 0 5px #fff; 
+
+
+}
+   
+
+
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#peliculas-mensaje {
+  position: fixed;
+  bottom: 2vh; /* Ajusta la distancia al logo */
+  right: 1%;   /* Ajusta la posición horizontal */
+  color: #fff;
+  font-family: "Press Start 2P", system-ui;
+  font-size: 12px;
+  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff; /* Efecto de brillo */
+  /*animation: glow 2s infinite alternate; /* Animación de brillo */
+}
+
+@keyframes glow {
+  from {
+    opacity: 0.8;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.52);
+    z-index: 0;
+}
+
+.window {
+    position: absolute;
+    border: 2px solid #000;
+    background-color: #c3c3c3;
+    z-index: 1;
+    resize: both;  /* Habilita el redimensionamiento */
+    overflow: auto; /* Agrega barras de desplazamiento si el contenido se desborda */
+    min-width: 200px; /* Ancho mínimo para evitar que se hagan demasiado pequeñas */
+    min-height: 150px; /* Altura mínima para evitar que se hagan demasiado pequeñas */
+}
+
+.window-title {
+    background-color: #000080;
+    color: #fff;
+    padding: 5px;
+    font-weight: bold;
+    cursor: move; /* Permite arrastrar la ventana */
+}
+
+.window-content {
+    padding: 10px;
+}
+
+#stream-window {
+            top: 10px;
+            left: 3%;
+            width: 83vw; /* Use vw for viewport width, adjust as needed */
+            height: 95vh; /* Use vh for viewport height */
+            background-color: #31313179;
+        }
+
+
+#chat-window {
+    top: 10px;
+    right: 10px;
+    width: 13%; 
+    height: 95vh;
+    background-color: #31313179;
+    font-size:11px;
+}
+
+        /* Estilos para los iframes */
+        .window-content iframe {
+            width: 100%;
+            height: 100%; /* Make the iframe fill the entire container */
+        }
+        #twitchy {
+    aspect-ratio: 16 / 9; 
+    height: 95%; 
+    left: 10px;
+        }
+
+        #logo {
+    position: fixed;       /* Fija el logo en la esquina */
+    bottom: 4vh;             /* Distancia desde arriba */
+    right: 0.95%;
+    height: 15%;           /* Distancia desde la derecha */
+    z-index: 2;            /* Asegura que esté encima de todo */
+    transition: 0.5s ease; 
+    opacity: calc(20%);
+  
+}   
+#logo:hover{
+    transform: scale(1.2);
+bottom: 6vh;
+    opacity: calc(100%);
+}
+
+</style>
+</head>
+<body>
+    <img id="logo" src="https://files.catbox.moe/d8xkiy.png" alt="Logo"> 
+
+    
+
+  <div id="background"></div>
+  <div id="overlay"></div>
+  
+ 
+  <div id="stream-window" class="window">
+    <div class="window-title">🔴 Devox TV - Stream en vivo.mp4</div>
+    <div class="window-content" id="twitchy"> 
+        </div>
+</div>
+<script type="text/javascript">
+    var options = {
+        channel: "teemo_en_arbusto",
+        parent : ["localhost"]
+        // only needed if your site is also embedded on embed.example.com and othersite.example.com
+    };
+    var player = new Twitch.Player("twitchy", options);
+    player.setVolume(0.5);
+</script>
+
+    </div>
+  </div>
+
+  <div id="chat-window" class="window">
+    <div class="window-title">Chat de Twitch ( ͡° ͜ʖ ͡°)</div>
+    <div class="window-content">
+        <iframe src="https://www.twitch.tv/embed/teemo_en_arbusto/chat?parent=localhost" frameborder="0" allowfullscreen="true"></iframe>
+    </div>
+  </div>
+
+<script>
+// Lógica para arrastrar ventanas
+const windows = document.querySelectorAll('.window');
+
+windows.forEach(window => {
+  let isDragging = false;
+  let offsetX, offsetY;
+
+  window.addEventListener('mousedown', (e) => {
+    if (e.target === window.querySelector('.window-title')) {
+      isDragging = true;
+      offsetX = e.clientX - window.offsetLeft;
+      offsetY = e.clientY - window.offsetTop;
+    }
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+      window.style.left = (e.clientX - offsetX) + 'px';
+      window.style.top = (e.clientY - offsetY) + 'px';
+    }
+  });
+
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+  });
+});
+
+// GIFS
+const mediaFiles = [];
+for (let i = 36; i <= 86; i++) {
+  mediaFiles.push({
+    type: 'gif',
+    url: `https://gif.plaza.one/${i}.gif`
+  });
+}
+for (let i = 10; i <= 83; i++) {
+  mediaFiles.push({
+    type: 'mp4',
+    url: `https://gif.plaza.one/mp4/${i}.mp4`
+  });
+}
+
+function setRandomMedia() {
+  let randomIndex = Math.floor(Math.random() * mediaFiles.length);
+  let randomMedia = mediaFiles[randomIndex];
+
+  if (randomMedia.type === 'gif') {
+    // Es un GIF, cargarlo como antes
+    const img = new Image();
+    img.onload = function() {
+      document.getElementById("background").style.backgroundImage = `url(${randomMedia.url})`;
+    }
+    img.onerror = function() {
+      console.log(`Error al cargar ${randomMedia.url}. Intentando con otro...`);
+      setRandomMedia();
+    }
+    img.src = randomMedia.url;
+  } else if (randomMedia.type === 'mp4') {
+    // Es un video MP4, crear un elemento de video
+    const video = document.createElement('video');
+    video.src = randomMedia.url;
+    video.autoplay = true;
+    video.loop = true;
+    video.muted = true; // Silenciar el video por defecto
+    video.style.width = '100%';
+    video.style.height = '100%';
+    video.style.objectFit = 'cover';
+
+    // Reemplazar el contenido del fondo con el video
+    const background = document.getElementById("background");
+    background.innerHTML = ''; // Limpiar el contenido anterior
+    background.appendChild(video);
+  }
+}
+
+// Iniciar la búsqueda de un medio aleatorio
+setRandomMedia();
+
+
+</script>
+
+</body>
+
+</html>
