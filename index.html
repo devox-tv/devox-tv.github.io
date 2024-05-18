@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <link rel="icon" href="https://files.catbox.moe/swxiui.png" type="image/png">
 <html>
-    <div id="peliculas-mensaje">✨ ¡Pedi pelis en el chat! ✨</div>
+    <div id="peliculas-mensaje">¡Pedi tu pelicula! ✨</div>
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; frame-src *; style-src * 'unsafe-inline';">
 <title>🔴 Ｄｅｖｏｘ　ＴＶ</title>
 <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
 
@@ -21,22 +21,12 @@ body {
     background-color: #c0c0c0;
     margin: 0;
     overflow: hidden;
-    font-size:12px !important;
+    font-size: clamp(10px, 2vw, 12px);
     text-shadow: 0 0 5px #fff; 
 
 
 }
    
-/* Mobile-specific adjustments */
-    @media (max-width: 768px) { 
-      body { font-size: 10px !important; } 
-      #peliculas-mensaje { font-size: 8px; bottom: 1vh; right: 0.5%; }
-      #stream-window { width: 45vw; height: 50vh; left: 0vw; }
-      #chat-window { width: 85vw; height: 45vh; right: 0vw; top: 52vh; }
-      #chatty { height: 60%; font-size: 9px; }
-      #logo { height: 10%; bottom: 2vh; }
-      #twitchy { height: 68%; aspect-ratio: auto;  }
-    }
 
 #background {
     position: fixed;
@@ -48,7 +38,28 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
-#peliculas-mensaje {
+
+#stream-window, #chat-window {
+      position: relative; 
+      width: 95%; 
+      height: auto; 
+      margin: 10px auto;
+      max-width: 83vw;
+      max-height: 95vh;
+      background-color: #50505062;
+    }
+
+    #chat-window {
+      width: 95%; 
+      order: 2;  
+      overflow-y: hidden; /* Hide vertical scrollbar */
+    }
+
+    #stream-window {
+      order: 1;
+    }
+
+    #peliculas-mensaje {
   position: fixed;
   z-index:1;
   bottom: 2vh; /* Ajusta la distancia al logo */
@@ -60,6 +71,49 @@ body {
   /*animation: glow 2s infinite alternate; /* Animación de brillo */
   opacity: calc(80%);
 }
+
+    /* Media queries for specific breakpoints */
+    @media (max-width: 768px) { 
+      #stream-window, #chat-window {
+        width: 100%; 
+      }
+      #chat-window {
+        order: 1;
+        margin-bottom: 10px;
+        overflow-y: auto; /* Show scrollbar on small screens */
+      }
+      #stream-window {
+        order: 2;
+      }
+      #peliculas-mensaje {
+        font-size: 10px;
+      }
+    }
+
+    @media (min-width: 1080px) { 
+      #stream-window, #chat-window {
+        width: 100%; 
+      }
+      #chat-window {
+        order: 1;
+        top:-75em;
+        right:-70em;
+        width: 19em;
+        height: 60em;
+        margin-bottom: 10px;
+        overflow-y: auto; /* Show scrollbar on small screens */
+      }
+      #stream-window {
+        order: 2;
+        margin-left: 6em;
+        height: 80em;
+        /*overflow-y: hidden;
+*/
+      }
+      #peliculas-mensaje {
+        font-size: 10px;
+      }
+    }
 
 @keyframes glow {
   from {
@@ -103,25 +157,6 @@ body {
     padding: 10px;
 }
 
-#stream-window {
-            top: 10px;
-            left: 3%;
-            width: 83vw; /* Use vw for viewport width, adjust as needed */
-            height: 95vh; /* Use vh for viewport height */
-            background-color: #31313179;
-            z-index:5;
-        }
-
-
-#chat-window {
-    top: 10px;
-    right: 10px;
-    width: 13%; 
-    height: 95vh;
-    background-color: #31313179;
-    font-size:11px;
-    z-index:6;
-}
 
         /* Estilos para los iframes */
         .window-content iframe {
@@ -135,7 +170,7 @@ body {
         }
 
         #chatty { 
-    height: 79%; 
+    height: 91%; 
     opacity: calc(80%);
         }
 
@@ -188,7 +223,7 @@ bottom: 6vh;
   </div>
 
   <div id="chat-window" class="window">
-    <div class="window-title">Chat de Twitch ( ͡° ͜ʖ ͡°)</div>
+    <div class="window-title">Chat ( ͡° ͜ʖ ͡°)</div>
     <div class="window-content" id="chatty">
         <iframe src="https://www.twitch.tv/embed/teemo_en_arbusto/chat?darkpopout&parent=devox-tv.github.io" frameborder="0" allowfullscreen="true"></iframe>
     </div>
